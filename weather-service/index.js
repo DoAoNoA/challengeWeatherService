@@ -1,8 +1,9 @@
 const cors = require('cors');
 const express = require('express');
 const path = require('path');
-const indexRoutes = require('./routes/index');
+//const indexRoutes = require('./routes/index');
 const usersRoutes = require('./routes/users');
+const citiesRoutes = require('./routes/cities');
 
 const app = express();
 
@@ -13,8 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 //routes
-app.use(indexRoutes);
+//app.use(indexRoutes);
 app.use('/api', usersRoutes);
+app.use('/api', citiesRoutes);
+
+//static files
+app.use(express.static(path.join(__dirname, 'dist')));
 
 //start server
 app.listen(3000, () => {
