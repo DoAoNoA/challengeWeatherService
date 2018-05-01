@@ -1,0 +1,36 @@
+<div class="container">
+    
+    <div class="row">
+      <div class="col">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">BOARD 1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">BOARD 2</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">BOARD 3</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+          <nav class="navbar navbar-light bg-light justify-content-between">
+            <a class="navbar-brand text-info"><h3 class="display-4">Weather Service</h3></a>
+            <form (submit)="addCity($event)">
+                <label for="formAddCity" class="text-info">ADD CITY</label>
+                <select class="border border-info rounded" id="formAddCity" name="selection" [(ngModel)]="selection">
+                  <option *ngFor="let city of cities; let i = index" [value]="city.city" class="text-capitalize">{{city.city}}</option>
+                </select>
+                <input type="submit" value="Ok" class="btn btn-info rounded-circle btn-sm"> 
+            </form>
+          </nav>
+      </div>
+    </div>
+  
+    <app-users></app-users>
+  
+</div>
