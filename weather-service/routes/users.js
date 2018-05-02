@@ -37,8 +37,14 @@ router.get('/users/:id', (req, res, next) => {
     });
 });
 
-router.post('/users', (req, res, next) => {
+router.post('/cities', (req, res, next) => {
     const user = req.body;
+    db.users.save(user, (err, user) => {
+        if (err) return next(err);
+        res.json(user);
+    });
+
+    /*
     if(!user.board || !(user.city + '')){
         res.status(400).json({
             error: 'Bad Data'
@@ -49,6 +55,7 @@ router.post('/users', (req, res, next) => {
             res.json(user);
         });
     }
+    */
 })
 
 router.delete('/users/:id', (req, res, next) => {
