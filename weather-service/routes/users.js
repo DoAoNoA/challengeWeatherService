@@ -2,8 +2,6 @@ const router = require('express').Router();
 const mongojs = require('mongojs');
 const db = mongojs('mean-db', ['users']);
 const request = require('request');
-const express = require('express');
-//const express = express();
 
 var url = "http://localhost:3000/query";
 
@@ -17,8 +15,7 @@ request(url, (err, resp, body) => {
     miObjeto.region = weatherJson.results.channel.location.region;
     miObjeto.forecast = weatherJson.results.channel.item.forecast;;
 
-    weatherMyJson = JSON.stringify(miObjeto);
-    
+    weatherMyJson = JSON.stringify(miObjeto);   
 });
 
 
