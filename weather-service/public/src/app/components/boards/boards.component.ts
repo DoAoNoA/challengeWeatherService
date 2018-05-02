@@ -24,7 +24,15 @@ export class BoardsComponent implements OnInit {
   }
 
   addCity(event){
-    console.log(this.selection);
+    const newCity: Cities = {
+      name: this.selection,
+      region:  this.selection
+    };
+    this.userService.addCity(newCity)
+      .subscribe(city => {
+        this.cities.push(city);
+      })
+    console.log(this.cities);
 
-  }  
+  } 
 }

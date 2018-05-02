@@ -14,4 +14,9 @@ export class UserService {
       .map(res => res);
   }
 
+  addCity(newCity: Cities) {
+    return this.http.post<Cities>(`${this.domain}/api/cities`, newCity)
+       .map(res => res);
+  }
+
 }
