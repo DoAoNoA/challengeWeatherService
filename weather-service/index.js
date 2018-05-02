@@ -22,6 +22,6 @@ app.use('/api', citiesRoutes);
 app.use(express.static(path.join(__dirname, 'dist')));
 
 //start server
-app.listen(3000, () => {
-    console .log('Server on port 3000');
+app.listen(3003, () => {
+    console .log('Server on port 3003');
 });

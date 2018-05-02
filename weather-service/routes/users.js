@@ -1,13 +1,36 @@
 const router = require('express').Router();
 const mongojs = require('mongojs');
 const db = mongojs('mean-db', ['users']);
+const request = require('request');
+const express = require('express');
+//const express = express();
+
+var url = "http://localhost:3000/query";
+
+var weatherJson;
+var miObjeto = new Object();
+var weatherMyJson;
+request(url, (err, resp, body) => {
+    weatherJson = JSON.parse(body);
+    
+    miObjeto.city = weatherJson.results.channel.location.city;
+    miObjeto.region = weatherJson.results.channel.location.region;
+    miObjeto.forecast = weatherJson.results.channel.item.forecast;;
+
+    weatherMyJson = JSON.stringify(miObjeto);
+    
+});
 
 
 router.get('/users', (req, res, next) => {
+    console.log("weatherMyJson es: " +weatherMyJson);
+    res.send(weatherMyJson);  
+    /*
     db.users.find((err, user) => {
         if (err) return next(err);
         res.json(user);
     });
+    */
 });
 
 router.get('/users/:id', (req, res, next) => {
