@@ -3,9 +3,9 @@ const router = require('express').Router();
 //const db = mongojs('mean-db', ['users']);
 
 var cities = [
-    {city:"nome", region:"ak"},
-    {city:"dallas", region:"tx"},
-    {city:"chicago", region:"il"}
+    {name:"nome", region:"ak"},
+    {name:"dallas", region:"tx"},
+    {name:"chicago", region:"il"}
   ];
 
 router.get('/cities', (req, res, next) => {
