@@ -1,5 +1,5 @@
 export class User{
     _id?: String;
-    city: String;
+    city: {name: String; region: String;} ;
     n?: Number;
 ;}

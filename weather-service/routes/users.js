@@ -3,21 +3,25 @@ const mongojs = require('mongojs');
 const db = mongojs('mean-db', ['users']);
 const request = require('request');
 
-var url = "http://localhost:3000/query";
+router.get('/users/:id', (req, res, next) => {   
+    db.users.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
+        if (err) return next(err);
+        //var userCities = doc.city;
 
-var weatherJson;
-var miObjeto = new Object();
-var weatherMyJson;
-request(url, (err, resp, body) => {
-    weatherJson = JSON.parse(body);
-    
-    miObjeto.city = weatherJson.results.channel.location.city;
-    miObjeto.region = weatherJson.results.channel.location.region;
-    miObjeto.forecast = weatherJson.results.channel.item.forecast;;
+        url = 'http://localhost:3000/nome/';
+        request({url, json:true}, (err, resp, body) => {
+            const path = body.query.results.channel;
+            var region = (path.location.region.toLowerCase()).trim();
+            var name = (path.location.city.toLowerCase()).trim();;
+            var condition = path.item.condition;
+            var forecast = path.item.forecast;
+            
+            myForecast = [{name:name, region:region, condition, forecast}, {name:name, region:region, condition, forecast}];
 
-    weatherMyJson = JSON.stringify(miObjeto);   
+            res.json(myForecast);
+        });
+    })
 });
-
 
 router.get('/users', (req, res, next) => {
     console.log("weatherMyJson es: " +weatherMyJson);

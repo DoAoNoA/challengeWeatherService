@@ -8,11 +8,18 @@ import { Cities } from '../../Cities'
   styleUrls: ['./boards.component.css']
 })
 export class BoardsComponent implements OnInit {
+  location: Cities[];
   
-  constructor() {
-   }
+  constructor(private userService: UserService) { 
+
+    this.userService.getLocation()
+    .subscribe(cities =>{
+      this.location = cities;
+      console.log(cities);
+    })
+  }
 
   ngOnInit() {
   }
-
+  
 }

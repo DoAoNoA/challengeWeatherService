@@ -13,10 +13,15 @@ export class UserService {
     return this.http.get<Cities[]>(`${this.domain}/api/cities`)
       .map(res => res);
   }
-
+  
+  getLocation(){
+    return this.http.get<Cities[]>(`${this.domain}/api/users/5aea6605f59d807ff44b5865`)
+      .map(res => res);
+  }
+  
   addCity(newCity: Cities) {
     return this.http.post<Cities>(`${this.domain}/api/cities`, newCity)
        .map(res => res);
   }
-
+  
 }
