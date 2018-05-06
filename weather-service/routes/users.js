@@ -1,26 +1,31 @@
 const router = require('express').Router();
 const mongojs = require('mongojs');
 const db = mongojs('mean-db', ['users']);
-const request = require('request');
+const axios = require('axios');
 
-router.get('/users/:id', (req, res, next) => {   
-    db.users.findOne({_id: mongojs.ObjectId(req.params.id)}, (err, doc) => {
-        if (err) return next(err);
-        //var userCities = doc.city;
+router.get('/users/:id', (req, res, next) => { 
 
-        url = 'http://localhost:3000/nome/';
-        request({url, json:true}, (err, resp, body) => {
-            const path = body.query.results.channel;
-            var region = (path.location.region.toLowerCase()).trim();
-            var name = (path.location.city.toLowerCase()).trim();;
-            var condition = path.item.condition;
-            var forecast = path.item.forecast;
+    db.users.find({_id: mongojs.ObjectId(req.params.id)}, function (err, docs) {
+        //console.log(docs[0])
+        var myCities = docs[0].cities
+        //console.log(myCities) 
+        
+        async function getWeather(myCities){
+            const promises = myCities.map(async city => {
+                const myCity = city.name; 
+                const response = await axios.get(`http://localhost:3000/${myCity}`);
             
-            myForecast = [{name:name, region:region, condition, forecast}, {name:name, region:region, condition, forecast}];
+                return response.data
+            })
 
-            res.json(myForecast);
-        });
-    })
+            const results = await Promise.all(promises)
+            return results
+        }
+        
+        getWeather(myCities)
+            .then((result) => res.json(result));
+            
+    });
 });
 
 router.get('/users', (req, res, next) => {
@@ -41,7 +46,7 @@ router.get('/users/:id', (req, res, next) => {
     });
 });
 
-router.post('/cities', (req, res, next) => {
+router.post('/cities/newCity', (req, res, next) => {
     const user = req.body;
     db.users.save(user, (err, user) => {
         if (err) return next(err);
@@ -62,13 +67,13 @@ router.post('/cities', (req, res, next) => {
     */
 })
 
-router.delete('/users/:id', (req, res, next) => {
-    db.users.findOne({_id: req.params.id},(err, user) => {
+router.delete('/cities/:name', (req, res, next) => {
+
+    db.users.findOne({"city.name": req.params.name},(err, user) => {
         if (err) return next(err);
-        const city = req.body;
-        db.users.remove({city: 'city'}, (err, result ) => {
+        db.users.remove({"city.name": req.params.name}, (err, result ) => {
             if (err) return next(err);
-            res.json(users);
+            res.json(result);
         }); 
     });      
 });
