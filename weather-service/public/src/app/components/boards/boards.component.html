@@ -2,13 +2,13 @@
   <div class="col" *ngFor="let city of location; let i = index">
     <div class="card border border-seccondary" >
       <div class="card-header d-flex justify-content-between text-secondary text-capitalize">
-        <h4>{{ city.name }},{{ city.region }}</h4>
+        <h4>{{ city.query.results.channel.location.city }},{{ city.query.results.channel.location.region }}</h4>
         <button class="btn btn-danger btn-sm" type="submit">DEL</button>
       </div>
       <div class="card-body">
-        <h4 class="font-weight-bold">{{ city.condition.date }} </h4>
-        <h5 class="text-muted">{{ city.condition.text }}</h5>
-        <h1 class="display-3">{{ city.condition.temp }}°</h1>
+        <h4 class="font-weight-bold">{{ city.query.results.channel.item.condition.date }} </h4>
+        <h5 class="text-muted">{{ city.query.results.channel.item.condition.text }}</h5>
+        <h1 class="display-3">{{ city.query.results.channel.item.condition.temp }}°</h1>
       </div>
       <div class="card-footer">
         <table class="table table-striped">
@@ -21,7 +21,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let userCity of city.forecast; let i = index">
+            <tr *ngFor="let userCity of city.query.results.channel.item.forecast; let i = index">
               <td>{{ userCity.day }}</td>
               <td>{{ userCity.low }}</td>
               <td>{{ userCity.high }}</td>

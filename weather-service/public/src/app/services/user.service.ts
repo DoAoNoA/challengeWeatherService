@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Cities } from '../Cities';
+import { Location } from '../Location';
 import "rxjs/Rx";
 
 @Injectable()
@@ -15,7 +16,7 @@ export class UserService {
   }
   
   getLocation(){
-    return this.http.get<Cities[]>(`${this.domain}/api/users/5aea6605f59d807ff44b5865`)
+    return this.http.get<Location[]>(`${this.domain}/api/users/5aef4ec429c2bff28ec9d8ee`)
       .map(res => res);
   }
   

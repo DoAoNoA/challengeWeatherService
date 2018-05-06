@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Cities } from '../../Cities'
+import { Cities } from '../../Cities';
+import { Location } from '../../Location';
 
 @Component({
   selector: 'app-boards',
@@ -8,14 +9,14 @@ import { Cities } from '../../Cities'
   styleUrls: ['./boards.component.css']
 })
 export class BoardsComponent implements OnInit {
-  location: Cities[];
+  location: Location[];
   
   constructor(private userService: UserService) { 
 
     this.userService.getLocation()
     .subscribe(cities =>{
       this.location = cities;
-      console.log(cities);
+      console.log('cities es: '+cities);
     })
   }
 
