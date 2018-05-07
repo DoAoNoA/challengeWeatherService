@@ -44,18 +44,6 @@ router.post('/users/:id/newCity', (req, res, next) => {
         res.json(doc);
     });
 
-    /*
-    if(!user.board || !(user.city + '')){
-        res.status(400).json({
-            error: 'Bad Data'
-        });
-    }else{
-        db.users.save(user, (error, task) => {
-            if (err) return next(err);
-            res.json(user);
-        });
-    }
-    */
 })
 
 router.delete('/users/:id/:delCity', (req, res, next) => {
