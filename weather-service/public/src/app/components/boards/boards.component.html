@@ -3,7 +3,7 @@
     <div class="card border border-seccondary" >
       <div class="card-header d-flex justify-content-between text-secondary text-capitalize">
         <h4>{{ city.query.results.channel.location.city }},{{ city.query.results.channel.location.region }}</h4>
-        <button class="btn btn-danger btn-sm" type="submit">DEL</button>
+        <button class="btn btn-danger btn-sm" type="submit" (click)="deleteLocation(city.query.results.channel.location.city)">DEL</button>
       </div>
       <div class="card-body">
         <h4 class="font-weight-bold">{{ city.query.results.channel.item.condition.date }} </h4>

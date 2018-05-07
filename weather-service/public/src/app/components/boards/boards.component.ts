@@ -23,4 +23,14 @@ export class BoardsComponent implements OnInit {
   ngOnInit() {
   }
   
+  deleteLocation(cityName){
+    cityName = cityName.toLowerCase()
+    console.log(cityName)
+
+    this.userService.deleteLocation(cityName)
+      .subscribe(data => {
+        console.log(data)
+      })
+    
+  }
 }

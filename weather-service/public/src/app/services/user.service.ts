@@ -24,5 +24,10 @@ export class UserService {
     return this.http.post<Cities>(`${this.domain}/api/users/5aef4ec429c2bff28ec9d8ee/newCity`, newCity)
        .map(res => res);
   }
+
+  deleteLocation(delCity) {
+    return this.http.delete<String>(`${this.domain}/api/users/5aef4ec429c2bff28ec9d8ee/${delCity}`)
+       .map(res => res);
+  }
   
 }
