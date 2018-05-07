@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cities } from '../Cities';
-import { Location } from '../Location';
+import { Cities } from '../class/Cities';
+import { Location } from '../class/Location';
 import "rxjs/Rx";
 
 @Injectable()
