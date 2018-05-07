@@ -70,15 +70,12 @@ router.post('/users/:id/newCity', (req, res, next) => {
     */
 })
 
-router.delete('/cities/:name', (req, res, next) => {
+router.delete('/users/:id/:delCity', (req, res, next) => {
 
-    db.users.findOne({"city.name": req.params.name},(err, user) => {
-        if (err) return next(err);
-        db.users.remove({"city.name": req.params.name}, (err, result ) => {
-            if (err) return next(err);
-            res.json(result);
-        }); 
-    });      
+    db.users.update(
+        {_id: mongojs.ObjectId(req.params.id)},
+        { $pull: { 'cities': { name: req.params.delCity } } }
+    )  
 });
 
 module.exports = router;
