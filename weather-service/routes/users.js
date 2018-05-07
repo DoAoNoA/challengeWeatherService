@@ -28,13 +28,6 @@ router.get('/users/:id', (req, res, next) => {
     });
 });
 
-router.get('/users/:id', (req, res, next) => {
-    db.users.findOne({_id: req.params.id},(err, user) => {
-        if (err) return next(err);
-        res.json(user);
-    });
-});
-
 router.post('/users/:id/newCity', (req, res, next) => {
     const newObj = req.body;  
 
