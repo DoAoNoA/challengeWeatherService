@@ -39,6 +39,7 @@ router.get('/users', (req, res, next) => {
     */
 });
 
+
 router.get('/users/:id', (req, res, next) => {
     db.users.findOne({_id: req.params.id},(err, user) => {
         if (err) return next(err);
@@ -46,11 +47,13 @@ router.get('/users/:id', (req, res, next) => {
     });
 });
 
-router.post('/cities/newCity', (req, res, next) => {
-    const user = req.body;
-    db.users.save(user, (err, user) => {
-        if (err) return next(err);
-        res.json(user);
+router.post('/users/:id/newCity', (req, res, next) => {
+    const newObj = req.body;  
+
+    db.users.findAndModify({query:{_id: mongojs.ObjectId(req.params.id)},
+    update: {$push:{'cities': newObj}},
+    new:true}, function (err, doc) {
+        res.json(doc);
     });
 
     /*
