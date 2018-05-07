@@ -23,9 +23,20 @@ export class UsersComponent implements OnInit {
   }
 
   addCity(event){
+    let  region
+    switch (this.selection) {
+      case "nome": region = "ak";
+        break;
+      case "dallas": region = "tx";
+        break;
+      case "chicago": region = "il";
+        break;
+      default:
+        break;
+    }
     const newCity: Cities = {
       name: this.selection,
-      region:  this.selection
+      region:  region
     };
     this.userService.addCity(newCity)
       .subscribe(city => {

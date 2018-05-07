@@ -21,7 +21,7 @@ export class UserService {
   }
   
   addCity(newCity: Cities) {
-    return this.http.post<Cities>(`${this.domain}/api/cities`, newCity)
+    return this.http.post<Cities>(`${this.domain}/api/users/5aef4ec429c2bff28ec9d8ee/newCity`, newCity)
        .map(res => res);
   }
   
