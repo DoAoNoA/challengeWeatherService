@@ -28,18 +28,6 @@ router.get('/users/:id', (req, res, next) => {
     });
 });
 
-router.get('/users', (req, res, next) => {
-    console.log("weatherMyJson es: " +weatherMyJson);
-    res.send(weatherMyJson);  
-    /*
-    db.users.find((err, user) => {
-        if (err) return next(err);
-        res.json(user);
-    });
-    */
-});
-
-
 router.get('/users/:id', (req, res, next) => {
     db.users.findOne({_id: req.params.id},(err, user) => {
         if (err) return next(err);
