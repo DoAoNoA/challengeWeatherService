@@ -12,25 +12,24 @@ export class BoardsComponent implements OnInit {
   location: Location[];
   
   constructor(private userService: UserService) { 
+  }
 
+  ngOnInit() {
     this.userService.getLocation()
     .subscribe(cities =>{
       this.location = cities;
       console.log('cities es: '+cities);
     })
   }
-
-  ngOnInit() {
-  }
   
+
   deleteLocation(cityName){
     cityName = cityName.toLowerCase()
     console.log(cityName)
-
     this.userService.deleteLocation(cityName)
       .subscribe(data => {
         console.log(data)
-      })
-    
+      })    
   }
+  
 }

@@ -12,14 +12,14 @@ export class UsersComponent implements OnInit {
   selection: String;
 
   constructor(private userService: UserService) {
-    this.userService.getCities()
-      .subscribe(cities =>{
-        this.cities = cities;
-        console.log(cities);
-      })
-   }
+    }
 
   ngOnInit() {
+    this.userService.getCities()
+    .subscribe(cities =>{
+      this.cities = cities;
+      console.log(cities);
+    })
   }
 
   addCity(event){
